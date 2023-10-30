@@ -213,3 +213,7 @@
     width: 70px;
     margin-bottom: 10px;
 }
+
+.hidden {
+    display: none;
+}
