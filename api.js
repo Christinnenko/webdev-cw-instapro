@@ -113,6 +113,11 @@ export function delPost({ token, postId }) {
             Authorization: token,
         },
     }).then((response) => {
+        if (response.status === 401) {
+            alert('Удалять посты могут только авторизованные пользователи')
+            throw new Error('Нет авторизации')
+        }
+
         return response.json()
     })
 }
@@ -164,6 +169,7 @@ export function dislikePost({ token, postId }) {
         },
     }).then((response) => {
         if (response.status === 401) {
+            alert('Лайкать посты могут только авторизованные пользователи')
             throw new Error('Нет авторизации')
         }
 
