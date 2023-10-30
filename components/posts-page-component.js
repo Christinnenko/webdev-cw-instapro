@@ -1,6 +1,13 @@
 import { USER_POSTS_PAGE } from '../routes.js'
 import { renderHeaderComponent } from './header-component.js'
-import { getToken, goToPage, posts, renderApp, setPosts } from '../index.js'
+import {
+    getToken,
+    goToPage,
+    page,
+    posts,
+    renderApp,
+    setPosts,
+} from '../index.js'
 import { formatDistanceToNow } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import { addLikePost, delPost, dislikePost, getPosts } from '../api'
@@ -122,8 +129,15 @@ export function likeEventListener() {
                     .then(() => {
                         getPosts({ token: getToken(), userId }).then(
                             (response) => {
-                                setPosts(response)
-                                renderApp()
+                                if (page === USER_POSTS_PAGE) {
+                                    setPosts(response)
+                                    goToPage(USER_POSTS_PAGE, {
+                                        userId,
+                                    })
+                                } else {
+                                    setPosts(response)
+                                    renderApp()
+                                }
                             },
                         )
                     })
@@ -135,8 +149,15 @@ export function likeEventListener() {
                     .then(() => {
                         getPosts({ token: getToken(), userId }).then(
                             (response) => {
-                                setPosts(response)
-                                renderApp()
+                                if (page === USER_POSTS_PAGE) {
+                                    setPosts(response)
+                                    goToPage(USER_POSTS_PAGE, {
+                                        userId,
+                                    })
+                                } else {
+                                    setPosts(response)
+                                    renderApp()
+                                }
                             },
                         )
                     })
@@ -164,8 +185,15 @@ export function likeEventListenerOnIMG() {
                     .then(() => {
                         getPosts({ token: getToken(), userId }).then(
                             (response) => {
-                                setPosts(response)
-                                renderApp()
+                                if (page === USER_POSTS_PAGE) {
+                                    setPosts(response)
+                                    goToPage(USER_POSTS_PAGE, {
+                                        userId,
+                                    })
+                                } else {
+                                    setPosts(response)
+                                    renderApp()
+                                }
                             },
                         )
                     })
@@ -177,8 +205,15 @@ export function likeEventListenerOnIMG() {
                     .then(() => {
                         getPosts({ token: getToken(), userId }).then(
                             (response) => {
-                                setPosts(response)
-                                renderApp()
+                                if (page === USER_POSTS_PAGE) {
+                                    setPosts(response)
+                                    goToPage(USER_POSTS_PAGE, {
+                                        userId,
+                                    })
+                                } else {
+                                    setPosts(response)
+                                    renderApp()
+                                }
                             },
                         )
                     })
@@ -202,8 +237,15 @@ export function deletePostEventListener() {
 
                 delPost({ token: getToken(), postId }).then(() => {
                     getPosts({ token: getToken(), userId }).then((response) => {
-                        setPosts(response)
-                        renderApp()
+                        if (page === USER_POSTS_PAGE) {
+                            setPosts(response)
+                            goToPage(USER_POSTS_PAGE, {
+                                userId,
+                            })
+                        } else {
+                            setPosts(response)
+                            renderApp()
+                        }
                     })
                 })
             }
