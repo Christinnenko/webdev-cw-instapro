@@ -34,6 +34,9 @@ export function renderPostsPageComponent() {
 
     const appHTML = getPosts
         .map((post, index) => {
+            const localUser = JSON.parse(window.localStorage.getItem('user'))
+            const localUserId = localUser ? localUser._id : null
+
             return `<div class="page-container">
             <div class="header-container"></div>
             <ul id="list" class="posts">
@@ -43,7 +46,11 @@ export function renderPostsPageComponent() {
                 <img src="${post.userImageUrl}" class="post-header-user-image">
                 <p class="post-header-user-name">${post.userName}</p></div>
                 <div class="delete-button-container">
-                <button class="delete-button" id="button-delete" data-post-id="${
+                <button class="delete-button ${
+                    localUser === null || post.userId !== localUserId
+                        ? 'hidden'
+                        : ''
+                }" id="button-delete" data-post-id="${
                     post.postId
                 }">Удалить</button>
               </div>
